@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arvie Monitor - Activity 6</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-icon">A</div>
+    <div>
+      <h1>Arvie Monitor</h1>
+      <p>DHT11 Environment Monitor</p>
+    </div>
+  </div>
+
+  <div class="system-status">
+    <span id="statusDot"></span>
+    <span id="statusText">CONNECTING</span>
+  </div>
+</header>
+
+<main class="dashboard">
+
+  <section class="welcome">
+    <p class="small-title">REALTIME MONITORING</p>
+    <h2>Temperature &amp; Humidity Dashboard</h2>
+    <p class="welcome-text">
+      ESP32 DHT11 sensor data from Firebase Realtime Database
+    </p>
+  </section>
+
+  <section class="cards">
+    <div class="info-card">
+      <div class="card-label">CURRENT TEMPERATURE</div>
+      <div class="sensor-value" id="currentTemperature">-- °C</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-label">CURRENT HUMIDITY</div>
+      <div class="sensor-value" id="currentHumidity">-- %</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-label">TOTAL RECORDS</div>
+      <div class="card-value" id="recordCount">0</div>
+    </div>
+  </section>
+
+  <section class="dashboard-layout">
+
+    <div class="dashboard-main">
+
+      <section class="panel graph-panel">
+        <div class="logs-top">
+          <div>
+            <p class="small-title">SENSOR GRAPH</p>
+            <h3>Temperature &amp; Humidity</h3>
+          </div>
+          <div class="live-label">
+            <span></span>
+            LIVE DATA
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="sensorChart"></canvas>
+        </div>
+      </section>
+
+      <section class="panel date-panel">
+        <div>
+          <p class="small-title">DATA FILTER</p>
+          <h3>Select Date</h3>
+        </div>
+        <select id="graphDate">
+          <option value="">Select Date</option>
+        </select>
+      </section>
+
+      <section class="panel history-panel">
+        <div class="logs-top">
+          <div>
+            <p class="small-title">SENSOR HISTORY</p>
+            <h3>Previous Readings</h3>
+          </div>
+          <button id="toggleHistory" class="cyan-button">
+            Show History
+          </button>
+        </div>
+
+        <div id="historyContent" class="hidden">
+          <div class="history-controls">
+            <span id="historyRecordCount">0 records</span>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Temperature</th>
+                  <th>Humidity</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <tr>
+                  <td colspan="3" class="empty">
+                    Waiting for Firebase data...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="panel relay-panel">
+      <p class="small-title">DEVICE CONTROL</p>
+      <h3>Relay Control Panel</h3>
+      <p class="relay-description">
+        Control your connected devices using the ESP32 relays.
+      </p>
+
+      <div class="relay-card">
+        <div class="relay-heading">
+          <div>
+            <h4>Relay 1</h4>
+            <p>GPIO 26</p>
+          </div>
+          <span id="led1Status" class="relay-status off">OFF</span>
+        </div>
+        <button id="led1Button" class="relay-button off">
+          TURN ON
+        </button>
+      </div>
+
+      <div class="relay-card">
+        <div class="relay-heading">
+          <div>
+            <h4>Relay 2</h4>
+            <p>GPIO 27</p>
+          </div>
+          <span id="led2Status" class="relay-status off">OFF</span>
+        </div>
+        <button id="led2Button" class="relay-button off">
+          TURN ON
+        </button>
+      </div>
+
+      <p id="relayMessage" class="relay-message">
+        Waiting for ESP32 connection...
+      </p>
+    </aside>
+
+  </section>
+</main>
+
+<footer>
+  Arvie ESP32 Activity 6 Monitoring System
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="script.js"></script>
+</body>
+</html>
